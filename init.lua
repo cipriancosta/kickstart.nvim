@@ -384,11 +384,19 @@ do
   --
   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
   vim.pack.add { gh 'folke/tokyonight.nvim' }
+
+  local util = require('tokyonight.util')
   ---@diagnostic disable-next-line: missing-fields
   require('tokyonight').setup {
     styles = {
       comments = { italic = false }, -- Disable italics in comments
     },
+    on_highlights = function(hl, c)
+      hl.Comment = {
+        fg = util.lighten(c.comment, 0.5),
+        italic = false,
+      }
+    end,
   }
 
   -- Load the colorscheme here.
